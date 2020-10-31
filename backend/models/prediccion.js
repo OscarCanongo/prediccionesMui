@@ -6,7 +6,7 @@ const PrediccionSchema = mongoose.Schema({
         require: true
       },
     date: {
-      type: Date,
+      type: Number,
       require: true
     },
     location: {

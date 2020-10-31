@@ -1,10 +1,10 @@
 const Prediccion = require("../models/Prediccion");
 
 //Get
-exports.getPrediccion = async (req, res) => {
+exports.getprediccion = async (req, res) => {
   try {
-    const Prediccion = await Prediccion.find();
-    res.json({ Prediccion });
+    const prediccion = await Prediccion.find();
+    res.json({ prediccion });
   } catch (error) {
     console.log(error);
     res.status(500).send("Hubo un error");
@@ -14,11 +14,11 @@ exports.getPrediccion = async (req, res) => {
 // Post
 exports.create = async (req, res) => {
  
-const Prediccion = new Prediccion(req.body);
+const prediccion = new Prediccion(req.body);
 
 //guarda el Prediccion en la db   
  try{
-    await Prediccion.save();
+    await prediccion.save();
 
     //Todo bien
     res.json({ msg: 'Datos guardados' });
