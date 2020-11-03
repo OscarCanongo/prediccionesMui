@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const PrediccionSchema = mongoose.Schema({
     id: {
-        type: Number,
+        type: String,
         require: true
       },
     date: {
