@@ -1,7 +1,6 @@
 import React from 'react';
 import './Prediccion.css';
 import Terminal from 'terminal-in-react';
-
 const Prediccion = () => {
 
     return (
