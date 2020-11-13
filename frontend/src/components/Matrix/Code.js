@@ -34,7 +34,7 @@ export default class Code extends Component {
     const yPosition = (codeLength + 1) * SYMBOL_HEIGHT * scaleRatio * 1.5;
 
     // we don't want to have partially overlaping lines - make columns
-    const stepCount = _.round((window.innerWidth - 30) / SYMBOL_WIDTH);
+    const stepCount = _.round((window.innerWidth - 20) / SYMBOL_WIDTH);
     const xPosition = _.random(0, stepCount) * SYMBOL_WIDTH;
 
     // we divide by scale ratio because if it is small it is probably far => thus slower :)
@@ -45,7 +45,7 @@ export default class Code extends Component {
   }
 
   componentDidMount() {
-    const startTime = _.random(300, 100000); // each starts in different time
+    const startTime = _.random(300, 10000); // each starts in different time
 
     setTimeout(() => {
       const newHeight = window.innerHeight + this.state.yPosition;
