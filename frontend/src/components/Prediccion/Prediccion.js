@@ -13,7 +13,10 @@ const Prediccion = () => {
           height: "100vh"
         }}
       >
-      <Terminal commands={{ 'open-google': () => window.open("https://www.google.com/", "_blank")}} />
+      <Terminal color='green'
+          backgroundColor='#0b0c0b'
+          barColor='black'
+          commands={{ 'open-google': () => window.open("https://www.google.com/", "_blank")}} />
       </div>
     );
 }
