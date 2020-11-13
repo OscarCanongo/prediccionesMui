@@ -21,7 +21,7 @@ export default class Symbol extends Component {
   makeSymbolDynamic() {
     setInterval(() => {
       this.setState({ char: this.getRandomChar() });
-    }, 55000);
+    }, 550);
   }
 
   render() {
