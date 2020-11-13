@@ -1,20 +1,11 @@
 import React from 'react';
 import './Prediccion.css';
+import Terminal from 'terminal-in-react';
 
 const Prediccion = () => {
 
     return (
-        
-        <div className="container-sm">
-        <div className="row">
-          <div className="col-sm">
-            <h1 className="text-center">Prediccion</h1>
-          </div>
-        </div>
-        </div>
-            
-
-            
+      <Terminal commands={{ 'open-google': () => window.open("https://www.google.com/", "_blank")}} />
     );
 }
 
