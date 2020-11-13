@@ -19,6 +19,7 @@ const port = process.env.PORT || 4000
 
 //Agregar la ruta 
 app.use('/predicciones', require('./routes/predicciones'));
+app.use('/usuarios', require('./routes/usuarios'));
 
 //Arrancar server
 app.listen(port, '0.0.0.0', () => {
