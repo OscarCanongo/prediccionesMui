@@ -7,9 +7,10 @@ const Prediccion = () => {
       <div
         style={{
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh"
+          justifyContent: "left",
+          alignItems: "left",
+          height: "100vh",
+          width: "100vh"
         }}
       >
       <Terminal color='green'
@@ -17,7 +18,7 @@ const Prediccion = () => {
           barColor='black'
           style={{ fontWeight: "bold", fontSize: "1em" }}
           commands={{ 'open-google': () => window.open("https://www.google.com/", "_blank") }}
-          hideTopBar='false' />
+          hideTopBar='false'/>
       </div>
     );
 }
