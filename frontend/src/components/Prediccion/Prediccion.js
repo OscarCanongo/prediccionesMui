@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Prediccion.css';
+import './Prediccion.css';
 
 const Prediccion = () => {
 
