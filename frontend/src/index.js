@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import MatrixParallax from 'react-matrix-parallax'
 
 ReactDOM.render(
   <React.StrictMode>
+    <MatrixParallax color='rgba(122, 229, 114, 0.87)' backgroundColor='rgba(0,0,0,1)'>
+    </MatrixParallax>
     <App />
   </React.StrictMode>,
   document.getElementById('root')
