@@ -13,9 +13,11 @@ const Prediccion = () => {
         }}
       >
       <Terminal color='green'
-          backgroundColor='#0b0c0b'
+          backgroundColor='black'
           barColor='black'
-          commands={{ 'open-google': () => window.open("https://www.google.com/", "_blank")}} />
+          style={{ fontWeight: "bold", fontSize: "1em" }}
+          commands={{ 'open-google': () => window.open("https://www.google.com/", "_blank") }}
+          hideTopBar='false' />
       </div>
     );
 }
