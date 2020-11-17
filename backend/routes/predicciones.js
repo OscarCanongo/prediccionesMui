@@ -6,7 +6,7 @@ const prediccionController = require("../controllers/prediccionController");
 router.get("/", prediccionController.getpredicciones);
 
 //Get prediccion
-router.get("/prediccion", prediccionController.getprediccion);
+router.post("/prediccion", prediccionController.getprediccion);
 
 // Post prediccion
 router.post("/", prediccionController.create);
