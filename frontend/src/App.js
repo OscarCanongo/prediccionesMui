@@ -1,36 +1,21 @@
 import './App.css';
-import Prediccion from './components/Prediccion/Prediccion';
-import React, { Fragment } from "react";
-//import Matrix from './components/Matrix/Matrix';
-import MatrixParallax from 'react-matrix-parallax'
-import MatrixBackground from './components/MyMatrix/matrix-background'
-
-
-
-
+import React from "react";
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import app from './components/app';
+import Login from './components/Admin/Login';
+import Admin from './components/Admin/Admin';
 
 function App() {
-    return ( <
-        >
-        <
-        div className = "App" >
-        <
-        Fragment >
-        <
-        MatrixBackground color = 'rgba(37, 218, 28, 0.87)'
-        backgroundColor = 'rgba(0,0,0,1)' >
-
-        <
-        Prediccion / >
-        <
-        /MatrixBackground> <
-        /Fragment>
-
-        <
-        /div>
-
-        <
-        />
+    return ( 
+        <div className = "App" >
+            <Router>
+                <Switch>
+                    <Route exact path = "/" component = {app}/>
+                    <Route exact path = "/login" component = {Login}/>
+                    <Route exact path = "/admin" component = {Admin}/>
+                </Switch>
+            </Router>
+        </div>
     );
 }
 
