@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const usuarioController = require('../controllers/usuarioController');
 const { check } = require ('express-validator');
+const auth = require('../middleware/auth');
 
 //Crea un usuario
 
@@ -17,6 +18,9 @@ router.post('/',
     usuarioController.nuevoUsuario
 );
 
-router.get("/", usuarioController.getUsuarios);
+router.get("/",
+    auth,
+    usuarioController.getUsuarios
+);
 
 module.exports = router;
