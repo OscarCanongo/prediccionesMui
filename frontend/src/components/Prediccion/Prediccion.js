@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './Prediccion.css';
 import Terminal from 'terminal-in-react';
 import clienteAxios from '../../config/axios';
-
+import { Button, Form, Container, Row } from 'react-bootstrap';
 const Prediccion = () => {
 
   const[data, setData] = useState([]);
@@ -34,13 +34,25 @@ const Prediccion = () => {
           width: "100vh"
         }}
       >
-        <h1>{data}</h1>
-      <Terminal color='green'
-          backgroundColor='black'
-          barColor='black'
-          style={{ fontWeight: "bold", fontSize: "1em" }}
-          commands={{ 'open-google': () => window.open("https://www.google.com/", "_blank") }}
-          hideTopBar='false'/>
+       
+    <Container>
+      <Row>
+      <h1>{data}</h1>
+      </Row>
+      <Row>
+        <Form>
+        <Form.Group controlId="formBasicEmail">
+            <Form.Label>Nombre</Form.Label>
+            <Form.Control placeholder="Nombre" />
+          </Form.Group>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Correo electronico</Form.Label>
+            <Form.Control placeholder="Correo" />
+          </Form.Group>
+          <Button variant="primary">Primary</Button>
+        </Form>
+      </Row>
+</Container>
       </div>
       </>
     );
