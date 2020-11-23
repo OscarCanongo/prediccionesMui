@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import AlertaContext from '../../context/alertas/alertaContext';
+import AuthContext from '../../context/authentication/authContext';
 import Logo from '../../images/mui.png';
 
 function Copyright() {
@@ -47,16 +49,67 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+const Login = (props) => {
   const classes = useStyles();
+
+  //Extraer los valores del context
+  const alertaContext = useContext(AlertaContext);
+  const { alerta, mostrarAlerta } = alertaContext;
+
+  const authContext = useContext(AuthContext);
+  const { mensaje, autenticado, iniciarSesion } = authContext;
+
+  //En caso que el password o user no exista
+  useEffect(() => {
+
+    if (autenticado) {
+        console.log("ENTRA");
+        props.history.push('/admin');
+    }
+
+    if (mensaje) {
+        mostrarAlerta(mensaje.msg, mensaje.categoria);
+    }
+
+    //eslint-disable-next-line
+  }, [mensaje, autenticado, props.history]);
+
+  //State para iniciar sesion
+  const [usuario, setUsuario] = useState ({
+    email:'',
+    password:''
+  });
+
+  //Extraer de usuario
+  const {email, password} = usuario;
+
+  const onChange = (e) =>{
+    setUsuario({
+        ...usuario,
+        [e.target.name] : e.target.value
+    })
+  };
+
+  //Cuando el usuaro quiere iniciar sesion
+  const onSubmit = e => {
+    e.preventDefault();
+
+    //Validar que no haya campos vacios
+    if (email.trim() === '' || password.trim() === '') {
+        mostrarAlerta('Todos los campos son obligatorios', 'alerta-error');
+    }
+
+    //Pasarlo al action
+    iniciarSesion({ email, password })
+  }
 
   return (
     <Container component="main" maxWidth="xs">
+      { alerta ? ( <div className = {`alerta ${alerta.categoria}`}> { alerta.msg }</div>) : null }
       <CssBaseline />
       <div className={classes.paper}>
         <img src={Logo} width = "60%"/>
-
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit = {onSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -67,6 +120,8 @@ export default function Login() {
             name="email"
             autoComplete="email"
             autoFocus
+            value = {email}
+            onChange = {onChange}
           />
           <TextField
             variant="outlined"
@@ -78,6 +133,8 @@ export default function Login() {
             type="password"
             id="password"
             autoComplete="current-password"
+            value = {password}
+            onChange = {onChange}
           />
           <Button
             type="submit"
@@ -96,3 +153,5 @@ export default function Login() {
     </Container>
   );
 }
+
+export default Login;
