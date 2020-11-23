@@ -27,19 +27,7 @@ const StyledTableCell = withStyles((theme) => ({
       },
     },
   }))(TableRow);
-  
-  function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-  }
-  
-  const rows = [
-    createData('El Benny', 25, "Americanista", "Vato"),
-    createData('El Chemo', 27, "Le va a los Pumas", "No binario"),
-    createData('El Oscar', 22, "PURO AZUL", "Vato"),
-    createData('Abi', 23, "Dueña de Cordoba", "Mujer"),
-    createData('Fer', 22, "Dueña de CAXA", "Mujer")
-  ];
-  
+
   const useStyles = makeStyles({
     table: {
       minWidth: 700,
@@ -48,13 +36,14 @@ const StyledTableCell = withStyles((theme) => ({
 
 const Admin = () => {
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   const classes = useStyles();
   
   useEffect(() => {
 
     const getUsers = async () => {
         const response = await clienteAxios.get('/usuarios');
+        setData(response.data.usuarios);
     }
 
     getUsers();
@@ -75,14 +64,25 @@ const Admin = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {data.map((row) => (
+            <StyledTableRow key={row._id}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {row.nombre}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
+              <StyledTableCell align="right">{row.edad}</StyledTableCell>
+              {
+                row.posicion === 1 ? row.posicion = "Baja"
+                : row.posicion === 2 ? row.posicion = "Media"
+                : row.posicion === 3 ? row.posicion = "Alta"
+                : null
+              }
+              <StyledTableCell align="right">{row.posicion}</StyledTableCell>
+              {
+                row.genero === 1 ? row.genero = "Hombre"
+                : row.genero === 2 ? row.genero = "Mujer"
+                : null
+              }
+              <StyledTableCell align="right">{row.genero}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
