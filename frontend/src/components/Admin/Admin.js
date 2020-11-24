@@ -71,10 +71,10 @@ const Admin = () => {
     displayName: 'Edad'
   }, {
     id: 'posicion',
-    displayName: 'Posición Social'
+    displayName: 'PosicionSocial'
   }, {
     id: 'genero',
-    displayName: 'Género'
+    displayName: 'Genero'
   }];
 
 
@@ -93,7 +93,7 @@ const Admin = () => {
             <Grid xs={1}>
                 <CsvDownloader
                   filename="usuarios"
-                  separator=";"
+                  separator=","
                   wrapColumnChar=""
                   columns={columns}
                   datas={data}
