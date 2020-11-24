@@ -10,6 +10,9 @@ import Paper from '@material-ui/core/Paper';
 import clienteAxios from '../../config/axios';
 import Logo from '../../images/mui.png';
 import AuthContext from '../../context/authentication/authContext';
+import CsvDownloader from 'react-csv-downloader';
+import Grid from '@material-ui/core/Grid';
+
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -60,12 +63,45 @@ const Admin = () => {
     //eslint-disable-next-line
   }, []);
 
+  const columns = [{
+    id: 'nombre',
+    displayName: 'Nombre'
+  }, {
+    id: 'edad',
+    displayName: 'Edad'
+  }, {
+    id: 'posicion',
+    displayName: 'Posición Social'
+  }, {
+    id: 'genero',
+    displayName: 'Género'
+  }];
+
 
   return (  
     <>
     { !autenticado ? ( <h1>USUARIO NO VALIDO</h1>) : (
+      <>
       <TableContainer component={Paper}>
-        <img src={Logo} width = "10%"/>
+                <Grid item xs>
+                 <img src={Logo} width = "10%"/>
+                </Grid>
+          <Grid container>
+            <Grid xs = {11}>
+
+            </Grid>
+            <Grid xs={1}>
+                <CsvDownloader
+                  filename="usuarios"
+                  separator=";"
+                  wrapColumnChar=""
+                  columns={columns}
+                  datas={data}
+                  text="DESCARGAR"/>
+                </Grid>
+          </Grid>
+        
+        </TableContainer>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
@@ -99,7 +135,7 @@ const Admin = () => {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+      </>
     )}
     </>
   );
