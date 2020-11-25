@@ -12,7 +12,7 @@ import Logo from '../../images/mui.png';
 import AuthContext from '../../context/authentication/authContext';
 import CsvDownloader from 'react-csv-downloader';
 import Grid from '@material-ui/core/Grid';
-
+import { Button, Card, Container, Row } from 'react-bootstrap';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -82,26 +82,22 @@ const Admin = () => {
     <>
     { !autenticado ? ( <h1>USUARIO NO VALIDO</h1>) : (
       <>
-      <TableContainer component={Paper}>
-                <Grid item xs>
-                 <img src={Logo} width = "10%"/>
-                </Grid>
-          <Grid container>
-            <Grid xs = {11}>
-
-            </Grid>
-            <Grid xs={1}>
-                <CsvDownloader
+      <Card >
+  <Card.Header> <img src={Logo} width = "10%"/></Card.Header>
+  <Card.Body>
+    <Card.Text>
+      Bienvenido al Administrador, aqui puedes descargar el formato en CSV
+    </Card.Text>
+    <CsvDownloader
                   filename="usuarios"
                   separator=","
                   wrapColumnChar=""
                   columns={columns}
                   datas={data}
                   text="DESCARGAR"/>
-                </Grid>
-          </Grid>
-        
-        </TableContainer>
+  </Card.Body>
+</Card>
+      
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
