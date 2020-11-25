@@ -102,9 +102,9 @@ const Admin = () => {
           <TableHead>
             <TableRow>
               <StyledTableCell>Nombre</StyledTableCell>
-              <StyledTableCell align="right">Edad</StyledTableCell>
-              <StyledTableCell align="right">Posición Social</StyledTableCell>
-              <StyledTableCell align="right">Género</StyledTableCell>
+              <StyledTableCell>Edad</StyledTableCell>
+              <StyledTableCell>Posición Social</StyledTableCell>
+              <StyledTableCell>Género</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -113,20 +113,20 @@ const Admin = () => {
                 <StyledTableCell component="th" scope="row">
                   {row.nombre}
                 </StyledTableCell>
-                <StyledTableCell align="right">{row.edad}</StyledTableCell>
+                <StyledTableCell >{row.edad}</StyledTableCell>
                 {
                   row.posicion === 1 ? row.posicion = "Baja"
                   : row.posicion === 2 ? row.posicion = "Media"
                   : row.posicion === 3 ? row.posicion = "Alta"
                   : null
                 }
-                <StyledTableCell align="right">{row.posicion}</StyledTableCell>
+                <StyledTableCell >{row.posicion}</StyledTableCell>
                 {
                   row.genero === 1 ? row.genero = "Hombre"
                   : row.genero === 2 ? row.genero = "Mujer"
                   : null
                 }
-                <StyledTableCell align="right">{row.genero}</StyledTableCell>
+                <StyledTableCell>{row.genero}</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
