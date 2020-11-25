@@ -86,8 +86,7 @@ const Admin = () => {
   <Card.Header> <img src={Logo} width = "10%"/></Card.Header>
   <Card.Body>
     <Card.Text>
-      Bienvenido al Administrador, aqui puedes descargar el formato en CSV
-    </Card.Text>
+      Bienvenido al Administrador, aqui puedes descargar el formato en CSV 
     <CsvDownloader
                   filename="usuarios"
                   separator=","
@@ -95,6 +94,7 @@ const Admin = () => {
                   columns={columns}
                   datas={data}
                   text="DESCARGAR"/>
+    </Card.Text>
   </Card.Body>
 </Card>
       
