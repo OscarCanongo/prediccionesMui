@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+.MatrixBackground-moveableChildren-gkny3u {
+  z-index: 30  !important; 
+}
