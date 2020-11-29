@@ -2,13 +2,22 @@ import React, {useState, useEffect} from 'react';
 import './Prediccion.css';
 import Terminal from 'terminal-in-react';
 import clienteAxios from '../../config/axios';
-import { Button, Form, Container, Row } from 'react-bootstrap';
+import { Form, Container, Row } from 'react-bootstrap';
+import { Button } from '@material-ui/core';
+import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { green} from '@material-ui/core/colors';
+import PropTypes from "prop-types";
+import { TextField } from '@material-ui/core';
 const Prediccion = () => {
 
   const[data, setData] = useState([]);
-
+  const theme = createMuiTheme({
+    palette: {
+      primary: green,
+    },
+  });
+  
     useEffect(() => {
-
         const getPrediccion = async () => {
             const response = await clienteAxios.post('/predicciones/prediccion',
               {
@@ -98,7 +107,11 @@ const Prediccion = () => {
               <option>Hombre</option>
             </Form.Control>
           </Form.Group>
-          <Button variant="primary">Primary</Button>
+          <ThemeProvider theme={theme}>
+        <Button variant="contained" color="primary">
+          Aceptar
+        </Button>
+      </ThemeProvider>
         </Form>
       </Row>
 </Container>
