@@ -5,7 +5,7 @@ import clienteAxios from '../../config/axios';
 import { Form, Container, Row } from 'react-bootstrap';
 import { Button } from '@material-ui/core';
 import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import { green} from '@material-ui/core/colors';
+import { green, lightGreen} from '@material-ui/core/colors';
 import PropTypes from "prop-types";
 import { TextField } from '@material-ui/core';
 const Prediccion = () => {
@@ -13,7 +13,7 @@ const Prediccion = () => {
   const[data, setData] = useState([]);
   const theme = createMuiTheme({
     palette: {
-      primary: green,
+      primary: lightGreen,
     },
   });
   
