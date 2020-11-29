@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './Prediccion.css';
 import Terminal from 'terminal-in-react';
 import clienteAxios from '../../config/axios';
-import { Form, Container, Row } from 'react-bootstrap';
-import { Button } from '@material-ui/core';
+import {Button, Form, Container, Row } from 'react-bootstrap';
 import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { green, lightGreen} from '@material-ui/core/colors';
 import PropTypes from "prop-types";
@@ -45,13 +44,13 @@ const Prediccion = () => {
         }}
       >
        
-    <Container>
+    <Container className="justify-content-center">
       <Row>
       <div>{data}</div>
       </Row>
-      <Row>
-        <Form>
-        <Form.Group >
+      <Row className="justify-content-center">
+        <Form align="center">
+        <Form.Group className="w3">
             <Form.Label>Nombre</Form.Label>
             <Form.Control placeholder="Nombre" />
           </Form.Group>
@@ -109,9 +108,7 @@ const Prediccion = () => {
             </Form.Control>
           </Form.Group>
           <ThemeProvider theme={theme}>
-        <Button variant="contained" color="primary">
-          Aceptar
-        </Button>
+          <Button variant="outline-success">Aceptar</Button>
       </ThemeProvider>
         </Form>
       </Row>
