@@ -3,20 +3,12 @@ import './Prediccion.css';
 import Terminal from 'terminal-in-react';
 import clienteAxios from '../../config/axios';
 import {Button, Form, Container, Row } from 'react-bootstrap';
-import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { green, lightGreen} from '@material-ui/core/colors';
-import PropTypes from "prop-types";
-import { TextField } from '@material-ui/core';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 const Prediccion = () => {
 
   const[data, setData] = useState([]);
-  const theme = createMuiTheme({
-    palette: {
-      primary: lightGreen,
-    },
-  });
   
     useEffect(() => {
         const getPrediccion = async () => {
@@ -49,7 +41,7 @@ const Prediccion = () => {
       <div>{data}</div>
       </Row>
       <Row className="justify-content-center">
-        <Form align="center">
+        <Form id="form">
         <Form.Group className="w3">
             <Form.Label>Nombre</Form.Label>
             <Form.Control placeholder="Nombre" />
@@ -107,9 +99,7 @@ const Prediccion = () => {
               <option>Hombre</option>
             </Form.Control>
           </Form.Group>
-          <ThemeProvider theme={theme}>
           <Button variant="outline-success">Aceptar</Button>
-      </ThemeProvider>
         </Form>
       </Row>
 </Container>
