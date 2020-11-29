@@ -8,6 +8,8 @@ import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material
 import { green, lightGreen} from '@material-ui/core/colors';
 import PropTypes from "prop-types";
 import { TextField } from '@material-ui/core';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 const Prediccion = () => {
 
   const[data, setData] = useState([]);
@@ -46,7 +48,7 @@ const Prediccion = () => {
        
     <Container>
       <Row>
-      <h1>{data}</h1>
+      <h3>{data}</h3>
       </Row>
       <Row>
         <Form>
