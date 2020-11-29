@@ -39,8 +39,7 @@ const Prediccion = () => {
       <div
         style={{
           display: "flex",
-          justifyContent: "left",
-          alignItems: "left",
+          justifyContent: "center",
           height: "100vh",
           width: "100vh"
         }}
@@ -48,7 +47,7 @@ const Prediccion = () => {
        
     <Container>
       <Row>
-      <h3>{data}</h3>
+      <div>{data}</div>
       </Row>
       <Row>
         <Form>
@@ -102,7 +101,7 @@ const Prediccion = () => {
               <option>Alta</option>
             </Form.Control>
           </Form.Group>
-          <Form.Group controlId="exampleForm.ControlSelect1">
+          <Form.Group controlId="exampleForm.ControlSelect1" >
             <Form.Label>Edad</Form.Label>
             <Form.Control as="select">
               <option>Mujer</option>
