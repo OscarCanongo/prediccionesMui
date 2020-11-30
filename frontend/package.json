@@ -15,6 +15,7 @@
     "react-bootstrap": "^1.4.0",
     "react-csv-downloader": "^2.2.0",
     "react-dom": "^17.0.1",
+    "react-hook-form": "^6.12.1",
     "react-js-table-with-csv-dl": "^0.9.7",
     "react-matrix-parallax": "^2.1.5",
     "react-router-dom": "^5.2.0",

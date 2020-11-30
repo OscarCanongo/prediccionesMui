@@ -140,7 +140,7 @@ const Login = (props) => {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            color="success"
             className={classes.submit}
           >
             Iniciar Sesión

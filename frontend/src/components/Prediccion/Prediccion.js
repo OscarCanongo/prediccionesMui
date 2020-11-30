@@ -1,15 +1,52 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 import './Prediccion.css';
 import Terminal from 'terminal-in-react';
 import clienteAxios from '../../config/axios';
 import {Button, Form, Container, Row } from 'react-bootstrap';
 import { green, lightGreen} from '@material-ui/core/colors';
+import { useForm } from 'react-hook-form'
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 const Prediccion = () => {
 
+  //Datos
   const[data, setData] = useState([]);
-  
+
+  //usuarios
+  const [usuario, setUsuario] = useState({
+        nombre: '',
+        edad: 18,
+        posicion: 0,
+        genero: 0
+    });
+
+  //Prediccion
+  const [prediccion, setPrediccion] = useState({
+        year: 0,
+        location: ''
+    });
+
+    //Extraer de de usuario
+    const {nombre, edad, posicion, genero} = usuario;
+
+    //Extraer de de prediccion
+    const {year, location} = usuario;
+
+    const onChange = (e) =>{
+      setUsuario({
+          ...usuario,
+          [e.target.name] : e.target.value
+      })
+    };
+
+    const onChange1 = (e) =>{
+      setPrediccion({
+          ...prediccion,
+          [e.target.name] : e.target.value
+      })
+    };
+
     useEffect(() => {
         const getPrediccion = async () => {
             const response = await clienteAxios.post('/predicciones/prediccion',
@@ -25,6 +62,21 @@ const Prediccion = () => {
         // eslint-disable-next-line
     }, []);
 
+    const {register, errors, handleSubmit} = useForm();
+
+    //Cuando el usuaro quiere iniciar sesion
+    const onSubmit = e => {
+      e.preventDefault();
+
+      console.log({usuario});
+    }
+
+    const onSubmit1 = e => {
+      e.preventDefault();
+
+      console.log({prediccion});
+    }
+
     return (
       <>
       <div
@@ -35,73 +87,98 @@ const Prediccion = () => {
           width: "100vh"
         }}
       >
-       
+
     <Container className="justify-content-center">
       <Row>
       <div>{data}</div>
       </Row>
-      <Row className="justify-content-center">
-        <Form id="form">
-        <Form.Group className="w3">
-            <Form.Label>Nombre</Form.Label>
-            <Form.Control placeholder="Nombre" />
-          </Form.Group>
-          <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>Edad</Form.Label>
-            <Form.Control as="select">
-              <option>18</option>
-              <option>19</option>
-              <option>20</option>
-              <option>21</option>
-              <option>22</option>
-              <option>23</option>
-              <option>24</option>
-              <option>25</option>
-              <option>26</option>
-              <option>27</option>
-              <option>28</option>
-              <option>29</option>
-              <option>30</option>
-              <option>31</option>
-              <option>32</option>
-              <option>33</option>
-              <option>34</option>
-              <option>35</option>
-              <option>36</option>
-              <option>37</option>
-              <option>38</option>
-              <option>39</option>
-              <option>40</option>
-              <option>41</option>
-              <option>42</option>
-              <option>43</option>
-              <option>44</option>
-              <option>45</option>
-              <option>46</option>
-              <option>47</option>
-              <option>48</option>
-              <option>49</option>
-              <option>50</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Posición Social</Form.Label>
-            <Form.Control as="select">
-              <option>Baja</option>
-              <option>Media</option>
-              <option>Alta</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group controlId="exampleForm.ControlSelect1" >
-            <Form.Label>Edad</Form.Label>
-            <Form.Control as="select">
-              <option>Mujer</option>
-              <option>Hombre</option>
-            </Form.Control>
-          </Form.Group>
-          <Button variant="outline-success">Aceptar</Button>
-        </Form>
-      </Row>
+    <h1>Formulario</h1>
+
+    <h2>Hooks Forms</h2>
+     <form onSubmit={onSubmit}>
+     <h3>Llene el formulario para conocer el futuro</h3>
+     <p>Escribe tu nombre</p>
+         <input
+             placeholder="Nombre"
+             className="form-control sm-4"
+             id="nombre"
+             name="nombre"
+             ref={register({
+                 required: {
+                     value: true,
+                     message: 'Nombre es requerido'
+                     },
+                 maxLength: {
+                     value: 5,
+                     message: 'No más de 5 carácteres!'
+                     },
+                 minLength: {
+                     value: 2,
+                     message: 'Mínimo 2 carácteres'
+                     }
+             })}
+             value = {nombre}
+             onChange = {onChange}
+         ></input>
+         <p>Escribe tu edad</p>
+         <input
+             placeholder="Edad"
+             className="form-control sm-4"
+             type="number"
+             id="edad"
+             name="edad"
+             ref={register({
+                 required: {
+                     value: true,
+                     message: 'Nombre es requerido'
+                     },
+                 maxLength: {
+                     value: 5,
+                     message: 'No más de 5 carácteres!'
+                     },
+                 minLength: {
+                     value: 2,
+                     message: 'Mínimo 2 carácteres'
+                     }
+             })}
+             value = {edad}
+             onChange = {onChange}
+         ></input>
+        <label for="posicion">Seleccione nivel socioeconomico:</label>
+            <select id="posicion" name="posicion" onChange={onChange} value={posicion}>
+                <option value="">Seleccione</option>
+                <option value="1">Bajo</option>
+                <option value="2">Medio</option>
+                <option value="3">Alto</option>
+             </select>
+             <label for="genero">Seleccione genero:</label>
+                 <select id="genero" name="genero" onChange={onChange} value={genero}>
+                     <option value="">Seleccione</option>
+                     <option value="1">Hombre</option>
+                     <option value="2">Mujer</option>
+                  </select>
+         <button  type="submit" className="btn btn-success">
+             Enviar
+         </button>
+     </form>
+     <form onSubmit={onSubmit1}>
+     <h3>Que tipo de prediccion quieres?</h3>
+                 <select id="location" name="location" onChange={onChange1} value={location}>
+                     <option value="">Seleccione</option>
+                     <option value="Mexico">Mexico</option>
+                     <option value="Mundo">Mundo</option>
+                  </select>
+                  <label for="year">Seleccione un año:</label>
+                  <select id="year" name="year" onChange={onChange1} value={year}>
+                      <option value="">Seleccione</option>
+                      <option value="2030">2030</option>
+                      <option value="2040">2040</option>
+                   </select>
+         <button  type="submit" className="btn btn-success">
+             Enviar
+         </button>
+     </form>
+
 </Container>
       </div>
       </>
