@@ -90,13 +90,11 @@ const Prediccion = () => {
 
     <Container className="justify-content-center">
       <Row>
-      <div>{data}</div>
+      <h1>{data}</h1>
       </Row>
-    <h1>Formulario</h1>
 
-    <h2>Hooks Forms</h2>
      <form onSubmit={onSubmit}>
-     <h3>Llene el formulario para conocer el futuro</h3>
+     <div>Llene el formulario para conocer el futuro</div>
      <p>Escribe tu nombre</p>
          <input
              placeholder="Nombre"
