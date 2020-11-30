@@ -47,34 +47,33 @@ const Prediccion = () => {
       })
     };
 
-    useEffect(() => {
-        const getPrediccion = async () => {
-            const response = await clienteAxios.post('/predicciones/prediccion',
-              {
-                date : 2040,
-                location: "Mexico"
-              }
-            );
-            setData(response.data.prediccion[0].text);
-        }
-
-        getPrediccion();
-        // eslint-disable-next-line
-    }, []);
-
     const {register, errors, handleSubmit} = useForm();
 
     //Cuando el usuaro quiere iniciar sesion
-    const onSubmit = e => {
+    const onSubmitUsuarios = async(e) => {
       e.preventDefault();
 
-      console.log({usuario});
+      const response = await clienteAxios.post('/usuarios',
+          {
+            nombre : usuario.nombre,
+            edad : usuario.edad,
+            posicion: usuario.posicion,
+            genero: usuario.genero
+          }
+      );
+
+      console.log(response);
     }
 
-    const onSubmit1 = e => {
+    const onSubmitPrediccion = async (e) => {
       e.preventDefault();
-
-      console.log({prediccion});
+      const response = await clienteAxios.post('/predicciones/prediccion',
+              {
+                date : prediccion.year,
+                location: prediccion.location
+              }
+            );
+            setData(response.data.prediccion[0].text);
     }
 
     return (
@@ -93,7 +92,7 @@ const Prediccion = () => {
       <h1>{data}</h1>
       </Row>
 
-     <form onSubmit={onSubmit}>
+     <form onSubmit={onSubmitUsuarios}>
      <div>Llene el formulario para conocer el futuro</div>
      <p>Escribe tu nombre</p>
          <input
@@ -159,7 +158,7 @@ const Prediccion = () => {
              Enviar
          </button>
      </form>
-     <form onSubmit={onSubmit1}>
+     <form onSubmit={onSubmitPrediccion}>
      <h3>Que tipo de prediccion quieres?</h3>
                  <select id="location" name="location" onChange={onChange1} value={location}>
                      <option value="">Seleccione</option>
