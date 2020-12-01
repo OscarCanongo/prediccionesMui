@@ -16,7 +16,7 @@ const Prediccion = () => {
   //usuarios
   const [usuario, setUsuario] = useState({
         nombre: '',
-        edad: 18,
+        edad: 0,
         posicion: 0,
         genero: 0
     });
@@ -32,13 +32,6 @@ const Prediccion = () => {
 
     //Extraer de de prediccion
     const {year, location} = usuario;
-
-    const onChange = (e) =>{
-      setUsuario({
-          ...usuario,
-          [e.target.name] : e.target.value
-      })
-    };
 
     const onChange1 = (e) =>{
       setPrediccion({
@@ -77,6 +70,15 @@ const Prediccion = () => {
       console.log({prediccion});
     }
 
+    const setValue = e =>{
+      if (e.key === "Enter") {
+        setUsuario({
+          ...usuario,
+          [e.target.name]: e.target.value
+        })
+      }
+    }
+
     return (
       <>
       <div
@@ -91,28 +93,76 @@ const Prediccion = () => {
           <div className="cmd">
             <div className="line"> 
               <span className="header">
-                &#36; root&#62;
+                &#36; root&#64;M.U.I&#62; Llene el formulario para conocer el futuro
               </span>
-              <div className="code">
-                Llene el formulario para conocer el futuro
-              </div>
             </div>
             <div className="line"> 
               <span className="header">
-                &#36; root&#62;
+                &#36; root&#64;M.U.I&#62; Cargando datos...
               </span>
-              <div className="code">
-                cargando datos...
-              </div>
             </div>
             <div className="line"> 
               <span className="header">
-                &#36; Introduzca nombre&#62;
+              &#36; root&#64;M.U.I&#62;
+              </span>
+            </div>
+            <div className="line"> 
+              <span className="header">
+              &#36; Nombre:
               </span>
               <div className="code">
-                Nombre
+                <input type="text" name="nombre" id="textinput" onKeyPress={setValue}/>
               </div>
             </div>
+            {
+              (usuario.nombre && usuario.nombre.length>1)?(
+              <div>
+                <div className="line"> 
+                  <span className="header">
+                    &#36; {usuario.nombre}&#64;M.U.I&#62; Leyendo nombre...
+                  </span>
+                </div>
+                <div className="line"> 
+                  <span className="header">
+                    &#36; {usuario.nombre}&#64;M.U.I&#62;
+                  </span>
+                </div>
+                <div className="line"> 
+                  <span className="header">
+                  &#36; Edad:
+                  </span>
+                  <div className="code">
+                    <input type="text" name="edad" id="textinput" onKeyPress={setValue}/>
+                  </div>
+                </div>
+              </div>
+              ):null
+            }
+            {
+              (usuario.edad && usuario.edad>0)?(
+              <div>
+                <div className="line"> 
+                  <span className="header">
+                    &#36; {usuario.nombre}&#64;M.U.I&#62; Leyendo edad...
+                  </span>
+                </div>
+                <div className="line"> 
+                  <span className="header">
+                    &#36; {usuario.nombre}&#64;M.U.I&#62;
+                  </span>
+                </div>
+                <div className="line"> 
+                  <span className="header">
+                  &#36; Género:
+                  </span>
+                  <div className="code">
+                    <input type="text" name="genero" id="textinput" onKeyPress={setValue}/>
+                  </div>
+                </div>
+              </div>
+              ):null
+            }
+            
           </div>
 
           <br></br>
