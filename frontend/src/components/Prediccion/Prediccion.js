@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form'
 import 'bootstrap/dist/css/bootstrap.min.css';
 const Prediccion = () => {
 
+  let showPrediction = false;
   //Datos
   const[data, setData] = useState([]);
 
@@ -17,8 +18,8 @@ const Prediccion = () => {
   const [usuario, setUsuario] = useState({
         nombre: '',
         edad: 0,
-        posicion: 0,
-        genero: 0
+        posicion: '',
+        genero: ''
     });
 
   //Prediccion
@@ -59,9 +60,13 @@ const Prediccion = () => {
 
     //Cuando el usuaro quiere iniciar sesion
     const onSubmit = e => {
-      e.preventDefault();
-
-      console.log({usuario});
+      if (e.key === "Enter") {
+        const resp = e.target.value;
+        if(resp === 'si'){
+          showPrediction = true;
+          console.log({usuario}, showPrediction);
+        }
+      }
     }
 
     const onSubmit1 = e => {
@@ -90,7 +95,9 @@ const Prediccion = () => {
       >
 
         <Container className="">
-          <div className="cmd">
+         {
+           (!showPrediction)?
+           <div className="cmd">
             <div className="line"> 
               <span className="header">
                 &#36; root&#64;M.U.I&#62; Llene el formulario para conocer el futuro
@@ -153,7 +160,7 @@ const Prediccion = () => {
                 </div>
                 <div className="line"> 
                   <span className="header">
-                  &#36; Género:
+                  &#36; Género (masculino o femenino):
                   </span>
                   <div className="code">
                     <input type="text" name="genero" id="textinput" onKeyPress={setValue}/>
@@ -162,11 +169,60 @@ const Prediccion = () => {
               </div>
               ):null
             }
-            
-          </div>
-
-          <br></br>
-
+            {
+              (usuario.genero && (usuario.genero==='masculino' || usuario.genero==='femenino'))?(
+              <div>
+                <div className="line"> 
+                  <span className="header">
+                    &#36; {usuario.nombre}&#64;M.U.I&#62; Leyendo género...
+                  </span>
+                </div>
+                <div className="line"> 
+                  <span className="header">
+                    &#36; {usuario.nombre}&#64;M.U.I&#62;
+                  </span>
+                </div>
+                <div className="line"> 
+                  <span className="header">
+                  &#36; Posición socioeconómica (alto, bajo o medio):
+                  </span>
+                  <div className="code">
+                    <input type="text" name="posicion" id="textinput" onKeyPress={setValue}/>
+                  </div>
+                </div>
+              </div>
+              ):null
+            }
+            {
+              (usuario.genero && (
+                  usuario.posicion==='alto' || 
+                  usuario.posicion==='medio' ||
+                  usuario.posicion==='bajo'
+                )
+              )?(
+              <div>
+                <div className="line"> 
+                  <span className="header">
+                    &#36; {usuario.nombre}&#64;M.U.I&#62; Leyendo posición socioeconómica...
+                  </span>
+                </div>
+                <div className="line"> 
+                  <span className="header">
+                    &#36; {usuario.nombre}&#64;M.U.I&#62;
+                  </span>
+                </div>
+                <div className="line"> 
+                  <span className="header">
+                  &#36; ¿Desea guardar los datos de usuario? (si o no):
+                  </span>
+                  <div className="code">
+                    <input type="text" name="send" id="textinput" onKeyPress={onSubmit}/>
+                  </div>
+                </div>
+              </div>
+              ):null
+            }
+          </div> : 
           <div className="cmd">
             <div className="line"> 
               <span className="header">
@@ -178,90 +234,7 @@ const Prediccion = () => {
               </div>
             </div>
           </div>
-
-        {/* <form onSubmit={onSubmit}>
-        <div>Llene el formulario para conocer el futuro</div>
-        <p>Escribe tu nombre</p>
-            <input
-                placeholder="Nombre"
-                className="form-control sm-4"
-                id="nombre"
-                name="nombre"
-                ref={register({
-                    required: {
-                        value: true,
-                        message: 'Nombre es requerido'
-                        },
-                    maxLength: {
-                        value: 5,
-                        message: 'No más de 5 carácteres!'
-                        },
-                    minLength: {
-                        value: 2,
-                        message: 'Mínimo 2 carácteres'
-                        }
-                })}
-                value = {nombre}
-                onChange = {onChange}
-            ></input>
-            <p>Escribe tu edad</p>
-            <input
-                placeholder="Edad"
-                className="form-control sm-4"
-                type="number"
-                id="edad"
-                name="edad"
-                ref={register({
-                    required: {
-                        value: true,
-                        message: 'Nombre es requerido'
-                        },
-                    maxLength: {
-                        value: 5,
-                        message: 'No más de 5 carácteres!'
-                        },
-                    minLength: {
-                        value: 2,
-                        message: 'Mínimo 2 carácteres'
-                        }
-                })}
-                value = {edad}
-                onChange = {onChange}
-            ></input>
-            <label for="posicion">Seleccione nivel socioeconomico:</label>
-                <select id="posicion" name="posicion" onChange={onChange} value={posicion}>
-                    <option value="">Seleccione</option>
-                    <option value="1">Bajo</option>
-                    <option value="2">Medio</option>
-                    <option value="3">Alto</option>
-                </select>
-                <label for="genero">Seleccione genero:</label>
-                    <select id="genero" name="genero" onChange={onChange} value={genero}>
-                        <option value="">Seleccione</option>
-                        <option value="1">Hombre</option>
-                        <option value="2">Mujer</option>
-                      </select>
-            <button  type="submit" className="btn btn-success">
-                Enviar
-            </button>
-        </form>
-        <form onSubmit={onSubmit1}>
-        <h3>Que tipo de prediccion quieres?</h3>
-                    <select id="location" name="location" onChange={onChange1} value={location}>
-                        <option value="">Seleccione</option>
-                        <option value="Mexico">Mexico</option>
-                        <option value="Mundo">Mundo</option>
-                      </select>
-                      <label for="year">Seleccione un año:</label>
-                      <select id="year" name="year" onChange={onChange1} value={year}>
-                          <option value="">Seleccione</option>
-                          <option value="2030">2030</option>
-                          <option value="2040">2040</option>
-                      </select>
-            <button  type="submit" className="btn btn-success">
-                Enviar
-            </button>
-        </form> */}
+         }
 
         </Container>
       </div>
