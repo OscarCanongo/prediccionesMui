@@ -11,7 +11,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { unstable_createMuiStrictModeTheme } from '@material-ui/core';
 const Prediccion = () => {
 
-  let showPrediction = false;
+  //Bandera
+  const [showPrediction, setShowPrediction] = useState(false);
+  
   //Datos
   const[data, setData] = useState([]);
 
@@ -25,8 +27,8 @@ const Prediccion = () => {
 
   //Prediccion
   const [prediccion, setPrediccion] = useState({
-        year: 2040,
-        location: 'Mexico'
+        year: 0,
+        location: ''
     });
 
     //Extraer de de usuario
@@ -42,20 +44,10 @@ const Prediccion = () => {
       })
     };
 
+    //Use Effect
     useEffect(() => {
-        const getPrediccion = async () => {
-            const response = await clienteAxios.post('/predicciones/prediccion',
-              {
-                date : prediccion.year,
-                location: prediccion.location
-              }
-            );
-            setData(response.data.prediccion[0].text);
-        }
-
-        getPrediccion();
-        // eslint-disable-next-line
-    }, []);
+      //console.log("ENTRA");
+    },[showPrediction]);
 
     const {register, errors, handleSubmit} = useForm();
 
@@ -64,7 +56,7 @@ const Prediccion = () => {
       if (e.key === "Enter") {
         const resp = e.target.value;
         if(resp === 'si'){
-          showPrediction = true;
+          setShowPrediction(true);
           console.log({usuario});
           if(usuario.posicion.toLowerCase() === 'alto'){
             usuario.posicion = 3;
@@ -87,6 +79,13 @@ const Prediccion = () => {
             }
           );
           console.log(response);
+          const response1 = await clienteAxios.post('/predicciones/prediccion',
+          {
+            date : prediccion.year,
+            location: prediccion.location
+          }
+           );
+           setData(response1.data.prediccion[0].text);
         }
       }
     }
@@ -112,6 +111,15 @@ const Prediccion = () => {
       if (e.key === "Enter") {
         setUsuario({
           ...usuario,
+          [e.target.name]: e.target.value
+        })
+      }
+    }
+
+    const setValuePrediccion = e =>{
+      if (e.key === "Enter") {
+        setPrediccion({
+          ...prediccion,
           [e.target.name]: e.target.value
         })
       }
@@ -232,14 +240,73 @@ const Prediccion = () => {
                   usuario.posicion==='medio' ||
                   usuario.posicion==='bajo'
                 )
-              )?(
-              <div>
-                <div className="line"> 
-                  <span className="header">
-                    &#36; {usuario.nombre}&#64;M.U.I&#62; Leyendo posición socioeconómica...
-                  </span>
+              )?
+              (
+                <div>
+                  <div className="line"> 
+                    <span className="header">
+                      &#36; {usuario.nombre}&#64;M.U.I&#62; Leyendo posición...
+                    </span>
+                  </div>
+                  <div className="line"> 
+                    <span className="header">
+                      &#36; {usuario.nombre}&#64;M.U.I&#62;
+                    </span>
+                  </div>
+                  <div className="line"> 
+                    <span className="header">
+                    &#36; Predicción (Mexico o Mundo):
+                    </span>
+                    <div className="code">
+                      <input type="text" name="location" id="textinput" onKeyPress={setValuePrediccion}/>
+                    </div>
+                  </div>
                 </div>
-                <div className="line"> 
+              ):null
+            }
+            {
+              (prediccion.location && (
+                prediccion.location.toLowerCase()==='mexico' || 
+                prediccion.location.toLowerCase()==='mundo' 
+                )
+              )?
+              (
+                <div>
+                  <div className="line"> 
+                    <span className="header">
+                      &#36; {usuario.nombre}&#64;M.U.I&#62; Leyendo hubicación...
+                    </span>
+                  </div>
+                  <div className="line"> 
+                    <span className="header">
+                      &#36; {usuario.nombre}&#64;M.U.I&#62;
+                    </span>
+                  </div>
+                  <div className="line"> 
+                    <span className="header">
+                    &#36; Año (2030 o 2040):
+                    </span>
+                    <div className="code">
+                      <input type="text" name="year" id="textinput" onKeyPress={setValuePrediccion}/>
+                    </div>
+                  </div>
+                </div>
+              ):null
+              }
+              {
+              (prediccion.year && (
+                prediccion.year === '2030' || 
+                prediccion.year=== '2040' 
+                )
+              )?
+              (
+                <div>
+                  <div className="line"> 
+                    <span className="header">
+                      &#36; {usuario.nombre}&#64;M.U.I&#62; Leyendo año...
+                    </span>
+                  </div>
+                  <div className="line"> 
                   <span className="header">
                     &#36; {usuario.nombre}&#64;M.U.I&#62;
                   </span>
@@ -252,9 +319,9 @@ const Prediccion = () => {
                     <input type="text" name="send" id="textinput" onKeyPress={onSubmit}/>
                   </div>
                 </div>
-              </div>
+                </div>
               ):null
-            }
+              }
           </div> : 
           <div className="cmd">
             <div className="line"> 
