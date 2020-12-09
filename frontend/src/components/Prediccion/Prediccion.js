@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form'
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { unstable_createMuiStrictModeTheme } from '@material-ui/core';
 const Prediccion = () => {
 
   let showPrediction = false;
@@ -59,14 +60,46 @@ const Prediccion = () => {
     const {register, errors, handleSubmit} = useForm();
 
     //Cuando el usuaro quiere iniciar sesion
-    const onSubmit = e => {
+    const onSubmit = async (e) => {
       if (e.key === "Enter") {
         const resp = e.target.value;
         if(resp === 'si'){
           showPrediction = true;
-          console.log({usuario}, showPrediction);
+          console.log({usuario});
+          if(usuario.posicion.toLowerCase() === 'alto'){
+            usuario.posicion = 3;
+          } else if (usuario.posicion.toLowerCase === 'medio'){
+            usuario.posicion = 2;
+          } else {
+            usuario.posicion = 1;
+          }
+          if(usuario.genero.toLowerCase() === 'masculino'){
+            usuario.genero = 1;
+          } else {
+            usuario.genero = 2;
+          }
+          const response = await clienteAxios.post('usuarios',
+            {
+              nombre : usuario.nombre,
+              edad : usuario.edad,
+              posicion: usuario.posicion,
+              genero: usuario.genero
+            }
+          );
+          console.log(response);
         }
       }
+    }
+
+    const onSubmitPrediccion = async (e) => {
+      e.preventDefault();
+      const response = await clienteAxios.post('/predicciones/prediccion',
+              {
+                date : prediccion.year,
+                location: prediccion.location
+              }
+            );
+            setData(response.data.prediccion[0].text);
     }
 
     const onSubmit1 = e => {
