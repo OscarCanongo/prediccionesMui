@@ -44,7 +44,6 @@ const Prediccion = () => {
       })
     };
 
-
     //Use Effect
     useEffect(() => {
       //console.log("ENTRA");
@@ -102,15 +101,10 @@ const Prediccion = () => {
             setData(response.data.prediccion[0].text);
     }
 
-    const onSubmitPrediccion = async (e) => {
+    const onSubmit1 = e => {
       e.preventDefault();
-      const response = await clienteAxios.post('/predicciones/prediccion',
-              {
-                date : prediccion.year,
-                location: prediccion.location
-              }
-            );
-            setData(response.data.prediccion[0].text);
+
+      console.log({prediccion});
     }
 
     const setValue = e =>{
