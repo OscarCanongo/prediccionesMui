@@ -5,3 +5,52 @@
     border-color: #28a745;
     box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
 } 
+
+.cmd {
+    position: relative;
+    top: 50px;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 4px;
+    border: 1px solid  rgba(255, 255, 255, 0.4);
+    padding: 30px 0px 30px 0px;
+}
+
+.line {
+    white-space: pre-line; 
+}
+
+.header {
+    float: left;
+    margin: 0px 5px;
+}
+
+.line::before {
+    content: "\A";
+    white-space: pre;
+}
+
+.code {
+    margin: 0 0;
+}
+
+.console {
+    margin: 0px;
+    padding: 0px;
+}
+.consoletext {
+    color: rgb(255, 255, 255);
+    margin: 10px 0px 0px 10px;
+}
+
+#textinput {
+    resize: none;
+    margin: 0px 0px 0px 10px;
+    border: none;
+    outline: none;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-family: Monospace;
+    width: calc(100% - 20px);
+    overflow: hidden;
+}
