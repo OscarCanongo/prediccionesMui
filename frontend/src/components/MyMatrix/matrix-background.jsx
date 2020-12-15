@@ -122,4 +122,5 @@ MatrixBackground.defaultProps = {
     backMatrixProps: {}
 }
 
-module.exports = withStyles(classes)(MatrixBackground)
+
+export default withStyles(classes)(MatrixBackground)

@@ -1,6 +1,4 @@
 import React from 'react';
-//import Matrix from './components/Matrix/Matrix';
-import MatrixParallax from 'react-matrix-parallax';
 import MatrixBackground from './MyMatrix/matrix-background';
 import Prediccion from './Prediccion/Prediccion';
 
