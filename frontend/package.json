@@ -18,8 +18,10 @@
     "react-hook-form": "^6.12.1",
     "react-js-table-with-csv-dl": "^0.9.7",
     "react-matrix-parallax": "^2.1.5",
+    "react-perfect-scrollbar": "^1.5.8",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "react-scrollbar": "^0.5.6",
     "terminal-in-react": "^4.3.1",
     "web-vitals": "^0.2.4"
   },
