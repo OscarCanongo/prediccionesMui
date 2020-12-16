@@ -10,9 +10,16 @@ const Prediccion = () => {
 
   //Bandera
   const [showPrediction, setShowPrediction] = useState(false);
-  
+  const [showName, setShowName] = useState(true);
+  const [showAge, setShowAge] = useState(false);
+  const [showGenre, setShowGenre] = useState(false);
+  const [showPosition, setShowPosition] = useState(false);
+  const [showLocation, setShowLocation] = useState(false);
+  const [showYear, setShowYear] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
   //Datos
-  const[data, setData] = useState([]);
+  const[data, setData] = useState('');
 
   //usuarios
   const [usuario, setUsuario] = useState({
@@ -32,7 +39,7 @@ const Prediccion = () => {
     //Use Effect
     useEffect(() => {
       //console.log("ENTRA");
-    },[showPrediction]);
+    },[showPrediction, showName, showAge, showGenre, showPosition, showLocation, showYear, showConfirmation]);
 
     //Cuando el usuaro quiere iniciar sesion
     const onSubmit = async (e) => {
@@ -78,15 +85,36 @@ const Prediccion = () => {
           ...usuario,
           [e.target.name]: e.target.value
         })
+        if (e.target.name === 'nombre') {
+          setShowName(false);
+          setShowAge(true);
+        } else if (e.target.name === 'edad'){
+          setShowAge(false);
+          setShowGenre(true);
+        } else if (e.target.name === 'genero'){
+          setShowGenre(false);
+          setShowPosition(true);
+        } else if (e.target.name === 'posicion'){
+          setShowPosition(false);
+          setShowLocation(true);
+        } 
       }
     }
 
     const setValuePrediccion = e =>{
       if (e.key === "Enter") {
+        console.log(e.target.name)
         setPrediccion({
           ...prediccion,
           [e.target.name]: e.target.value
         })
+        if (e.target.name === 'location'){
+          setShowLocation(false);
+          setShowYear(true);
+        } else if (e.target.name === 'year'){
+          setShowYear(false);
+          setShowConfirmation(true);
+        }
       }
     }
 
@@ -102,34 +130,43 @@ const Prediccion = () => {
 
         <Container fluid="md">
           <Row>
+          {
+          (!showPrediction)?
             <Col md={6} lg={6}>
               <PerfectScrollbar scrollYMarginOffset="300">
                 <div className="cmd">
-                  <div className="line"> 
-                    <span className="header">
-                      &#36; root&#64;M.U.I&#62; Llene el formulario para conocer el futuro
-                    </span>
-                  </div>
-                  <div className="line"> 
-                    <span className="header">
-                      &#36; root&#64;M.U.I&#62; Cargando datos...
-                    </span>
-                  </div>
-                  <div className="line"> 
-                    <span className="header">
-                    &#36; root&#64;M.U.I&#62;
-                    </span>
-                  </div>
-                  <div className="line"> 
-                    <span className="header">
-                    &#36; Nombre:
-                    </span>
-                    <div className="code">
-                      <input type="text" name="nombre" id="textinput" onKeyPress={setValue}/>
-                    </div>
-                  </div>
                   {
-                    (usuario.nombre && usuario.nombre.length>1)?(
+                    (showName) 
+                    ?(
+                      <>
+                    <div className="line"> 
+                      <span className="header">
+                        &#36; root&#64;M.U.I&#62; Llene el formulario para conocer el futuro
+                      </span>
+                    </div>
+                    <div className="line"> 
+                      <span className="header">
+                        &#36; root&#64;M.U.I&#62; Cargando datos...
+                      </span>
+                    </div>
+                    <div className="line"> 
+                      <span className="header">
+                      &#36; root&#64;M.U.I&#62;
+                      </span>
+                    </div>
+                    <div className="line"> 
+                      <span className="header">
+                      &#36; Nombre:
+                      </span>
+                      <div className="code">
+                        <input type="text" name="nombre" id="textinput" onKeyPress={setValue}/>
+                      </div>
+                    </div>
+                    </>
+                    ) : null
+                  }
+                  {
+                    (usuario.nombre && usuario.nombre.length>1 && showAge)?(
                     <div>
                       <div className="line"> 
                         <span className="header">
@@ -153,7 +190,7 @@ const Prediccion = () => {
                     ):null
                   }
                   {
-                    (usuario.edad && usuario.edad>0)?(
+                    (usuario.edad && usuario.edad>0 && showGenre)?(
                     <div>
                       <div className="line"> 
                         <span className="header">
@@ -177,7 +214,7 @@ const Prediccion = () => {
                     ):null
                   }
                   {
-                    (usuario.genero && (usuario.genero==='masculino' || usuario.genero==='femenino'))?(
+                    (usuario.genero && (usuario.genero==='masculino' || usuario.genero==='femenino') && showPosition)?(
                     <div>
                       <div className="line"> 
                         <span className="header">
@@ -205,7 +242,7 @@ const Prediccion = () => {
                         usuario.posicion==='alto' || 
                         usuario.posicion==='medio' ||
                         usuario.posicion==='bajo'
-                      )
+                      ) && showLocation
                     )?
                     (
                       <div>
@@ -234,7 +271,7 @@ const Prediccion = () => {
                     (prediccion.location && (
                       prediccion.location.toLowerCase()==='mexico' || 
                       prediccion.location.toLowerCase()==='mundo' 
-                      )
+                      ) && showYear
                     )?
                     (
                       <div>
@@ -263,7 +300,7 @@ const Prediccion = () => {
                     (prediccion.year && (
                       prediccion.year === '2030' || 
                       prediccion.year=== '2040' 
-                      )
+                      ) && showConfirmation
                     )?
                     (
                       <div>
@@ -291,19 +328,35 @@ const Prediccion = () => {
                 </div> 
               </PerfectScrollbar>
             </Col>
+            : 
             <Col md={6} lg={6}>
-              <div className="cmd">
-                <div className="line"> 
-                  <span className="header">
-                    Predicción para {prediccion.location}, el {prediccion.year}:
-                  </span>
-                  <br></br>
-                  <div className="code" style={{fontWeight: "bold", margin: '20px 0px'}}>
-                    {data}
+              {
+                data.length > 0 ?
+                 <div className="cmd">
+                    <div className="line"> 
+                      <span className="header">
+                        Predicción para {prediccion.location}, el {prediccion.year}:
+                      </span>
+                      <br></br>
+                      <div className="code" style={{fontWeight: "bold", margin: '20px 0px'}}>
+                        {data}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
+                :  <div className="cmd">
+                    <div className="line"> 
+                      <span className="header">
+                        Predicción para {prediccion.location}, el {prediccion.year}:
+                      </span>
+                      <br></br>
+                      <div className="code" style={{fontWeight: "bold", margin: '20px 0px'}}>
+                        Cargando predicción ....
+                      </div>
+                    </div>
+                  </div>
+              }
             </Col>
+          }
           </Row>
         </Container>
       </div>
