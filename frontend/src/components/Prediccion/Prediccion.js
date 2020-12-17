@@ -85,18 +85,29 @@ const Prediccion = () => {
           ...usuario,
           [e.target.name]: e.target.value
         })
-        if (e.target.name === 'nombre') {
-          setShowName(false);
-          setShowAge(true);
+        if (e.target.name === 'nombre' && usuario.nombre.length>1) {
+          console.log("ENTRA ADENTRO DEL IF")
+            setShowName(false);
+            setShowAge(true); 
         } else if (e.target.name === 'edad'){
-          setShowAge(false);
-          setShowGenre(true);
+          if (usuario.edad && usuario.edad>0) {
+            setShowAge(false);
+            setShowGenre(true); 
+          }
         } else if (e.target.name === 'genero'){
-          setShowGenre(false);
-          setShowPosition(true);
+          if (usuario.genero && (usuario.genero==='masculino' || usuario.genero==='femenino')) {
+            setShowGenre(false);
+            setShowPosition(true); 
+          }
         } else if (e.target.name === 'posicion'){
-          setShowPosition(false);
-          setShowLocation(true);
+          if (usuario.genero && (
+            usuario.posicion==='alto' || 
+            usuario.posicion==='medio' ||
+            usuario.posicion==='bajo'
+          )) {
+            setShowPosition(false);
+            setShowLocation(true); 
+          }
         } 
       }
     }
@@ -109,11 +120,21 @@ const Prediccion = () => {
           [e.target.name]: e.target.value
         })
         if (e.target.name === 'location'){
-          setShowLocation(false);
-          setShowYear(true);
+          if (prediccion.location && (
+            prediccion.location.toLowerCase()==='mexico' || 
+            prediccion.location.toLowerCase()==='mundo' 
+            )) {
+              setShowLocation(false);
+              setShowYear(true);
+          }
         } else if (e.target.name === 'year'){
-          setShowYear(false);
-          setShowConfirmation(true);
+          if (prediccion.year && (
+            prediccion.year === '2030' || 
+            prediccion.year=== '2040' 
+            )) {
+              setShowYear(false);
+              setShowConfirmation(true);
+          }
         }
       }
     }
@@ -133,7 +154,6 @@ const Prediccion = () => {
           {
           (!showPrediction)?
             <Col md={6} lg={6}>
-              <PerfectScrollbar scrollYMarginOffset="300">
                 <div className="cmd">
                   {
                     (showName) 
@@ -146,7 +166,7 @@ const Prediccion = () => {
                     </div>
                     <div className="line"> 
                       <span className="header">
-                        &#36; root&#64;M.U.I&#62; Cargando datos...
+                        &#36; root&#64;M.U.I&#62; Doble enter para confirmar nombre
                       </span>
                     </div>
                     <div className="line"> 
@@ -166,7 +186,7 @@ const Prediccion = () => {
                     ) : null
                   }
                   {
-                    (usuario.nombre && usuario.nombre.length>1 && showAge)?(
+                    (showAge)?(
                     <div>
                       <div className="line"> 
                         <span className="header">
@@ -175,7 +195,7 @@ const Prediccion = () => {
                       </div>
                       <div className="line"> 
                         <span className="header">
-                          &#36; {usuario.nombre}&#64;M.U.I&#62;
+                          &#36; {usuario.nombre}&#64;M.U.I&#62; Doble enter para confirmar edad
                         </span>
                       </div>
                       <div className="line"> 
@@ -190,7 +210,7 @@ const Prediccion = () => {
                     ):null
                   }
                   {
-                    (usuario.edad && usuario.edad>0 && showGenre)?(
+                    (showGenre)?(
                     <div>
                       <div className="line"> 
                         <span className="header">
@@ -199,7 +219,7 @@ const Prediccion = () => {
                       </div>
                       <div className="line"> 
                         <span className="header">
-                          &#36; {usuario.nombre}&#64;M.U.I&#62;
+                          &#36; {usuario.nombre}&#64;M.U.I&#62; Doble enter para confirmar género
                         </span>
                       </div>
                       <div className="line"> 
@@ -214,7 +234,7 @@ const Prediccion = () => {
                     ):null
                   }
                   {
-                    (usuario.genero && (usuario.genero==='masculino' || usuario.genero==='femenino') && showPosition)?(
+                    (showPosition)?(
                     <div>
                       <div className="line"> 
                         <span className="header">
@@ -223,7 +243,7 @@ const Prediccion = () => {
                       </div>
                       <div className="line"> 
                         <span className="header">
-                          &#36; {usuario.nombre}&#64;M.U.I&#62;
+                          &#36; {usuario.nombre}&#64;M.U.I&#62; Doble enter para confirmar posición
                         </span>
                       </div>
                       <div className="line"> 
@@ -238,12 +258,7 @@ const Prediccion = () => {
                     ):null
                   }
                   {
-                    (usuario.genero && (
-                        usuario.posicion==='alto' || 
-                        usuario.posicion==='medio' ||
-                        usuario.posicion==='bajo'
-                      ) && showLocation
-                    )?
+                    (showLocation)?
                     (
                       <div>
                         <div className="line"> 
@@ -253,7 +268,7 @@ const Prediccion = () => {
                         </div>
                         <div className="line"> 
                           <span className="header">
-                            &#36; {usuario.nombre}&#64;M.U.I&#62;
+                            &#36; {usuario.nombre}&#64;M.U.I&#62; Doble enter para confirmar 
                           </span>
                         </div>
                         <div className="line"> 
@@ -268,11 +283,7 @@ const Prediccion = () => {
                     ):null
                   }
                   {
-                    (prediccion.location && (
-                      prediccion.location.toLowerCase()==='mexico' || 
-                      prediccion.location.toLowerCase()==='mundo' 
-                      ) && showYear
-                    )?
+                    (showYear)?
                     (
                       <div>
                         <div className="line"> 
@@ -282,7 +293,7 @@ const Prediccion = () => {
                         </div>
                         <div className="line"> 
                           <span className="header">
-                            &#36; {usuario.nombre}&#64;M.U.I&#62;
+                            &#36; {usuario.nombre}&#64;M.U.I&#62; Doble enter para confirmar año
                           </span>
                         </div>
                         <div className="line"> 
@@ -297,11 +308,7 @@ const Prediccion = () => {
                     ):null
                     }
                     {
-                    (prediccion.year && (
-                      prediccion.year === '2030' || 
-                      prediccion.year=== '2040' 
-                      ) && showConfirmation
-                    )?
+                    (showConfirmation)?
                     (
                       <div>
                         <div className="line"> 
@@ -326,7 +333,6 @@ const Prediccion = () => {
                     ):null
                     }
                 </div> 
-              </PerfectScrollbar>
             </Col>
             : 
             <Col md={6} lg={6}>
