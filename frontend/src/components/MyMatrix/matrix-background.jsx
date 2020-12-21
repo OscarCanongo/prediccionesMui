@@ -1,6 +1,6 @@
-let React = require('react')
+import React from 'react';
+import Matrix from './matrix';
 let { withStyles } = require('@material-ui/styles')
-let Matrix = require('./matrix')
 
 const classes = {
     fullWindow: {

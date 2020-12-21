@@ -139,4 +139,4 @@ Matrix.defaultProps = {
     backgroundColor: 'black'
 };
 
-module.exports = Matrix
+export default Matrix;
