@@ -142,13 +142,8 @@ const Prediccion = () => {
     return (
       <>
       <div
-        style={{
-          display: "flex",
-          height: "100vh",
-          width: "100vh"
-        }}
+        className = "matrix"
       >
-
         <Container fluid="md">
           <Row>
           {

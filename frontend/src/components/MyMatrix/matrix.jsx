@@ -1,4 +1,4 @@
-let React = require('react')
+import React from 'react';
 let PropTypes = require('prop-types')
 
 let largerThanAnyPageSize = 9999999
