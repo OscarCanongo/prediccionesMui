@@ -1,5 +1,4 @@
 @import 'react-perfect-scrollbar/dist/css/styles.css';
-
 .matrix {
     Display: flex;
     Height: 100vh;
@@ -7,63 +6,72 @@
     Align-Items: center;
     Justify-Content: center;
     background: url("../../images/matrix.gif") no-repeat fixed center;
-   -webkit-background-size: cover;
-   -moz-background-size: cover;
-   -o-background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
+
 .w3 {
-	background-color: "#2b2d2b";
+    background-color: "#2b2d2b";
 }
+
 .form-control:focus {
-	border-color: #28a745;
-	box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69);
 }
 
 .cmd {
-	position: relative;
-	top: 20px;
-	background: rgba(0, 0, 0, 0.8);
-	border-radius: 4px;
-	border: 1px solid rgba(255, 255, 255, 0.4);
-	padding: 30px 0px 30px 0px;
-	height: auto;
+    position: relative;
+    top: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 30px 0px 30px 0px;
+    height: auto;
+    margin: 0 auto;
 }
 
 .line {
-	white-space: pre-line;
+    white-space: pre-line;
 }
 
 .header {
-	float: left;
-	margin: 0px 5px;
+    float: left;
+    margin: 0px auto;
+    color: #28a745;
+    font-family: monospace;
 }
 
 .line::before {
-	content: "\A";
-	white-space: pre;
+    content: "\A";
+    white-space: pre;
 }
 
 .code {
-	margin: 0 0;
+    margin: 0 auto;
+    color: #28a745;
+    font-weight: bold;
+    font-family: monospace;
 }
 
 .console {
-	margin: 0px;
-	padding: 0px;
+    margin: 0px;
+    padding: 0px;
 }
+
 .consoletext {
-	color: rgb(255, 255, 255);
-	margin: 10px 0px 0px 10px;
+    color: rgb(255, 255, 255);
+    margin: 10px 0px 0px 10px;
 }
 
 #textinput {
-	resize: none;
-	margin: 0px 0px 0px 10px;
-	border: none;
-	outline: none;
-	background-color: rgb(0, 0, 0);
-	color: rgb(255, 255, 255);
-	font-family: Monospace;
-	width: calc(100% - 20px);
-	overflow: hidden;
+    resize: none;
+    margin: 0px 0px 0px 10px;
+    border: none;
+    outline: none;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-family: Monospace;
+    width: calc(100% - 20px);
+    overflow: hidden;
 }
