@@ -1,9 +1,7 @@
 import React, {useState, useEffect, Fragment} from 'react';
 import './Prediccion.css';
 import clienteAxios from '../../config/axios';
-import {Button, Col, Container, Row } from 'react-bootstrap';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-
+import {Col, Container, Row } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 const Prediccion = () => {
@@ -148,6 +146,9 @@ const Prediccion = () => {
           <Row>
           {
           (!showPrediction)?
+            <>
+            <Col xs = {3} md={3} lg={3}>
+            </Col>
             <Col md={6} lg={6}>
                 <div className="cmd">
                   {
@@ -329,6 +330,7 @@ const Prediccion = () => {
                     }
                 </div> 
             </Col>
+            </>
             : 
             <Col md={6} lg={6}>
               {

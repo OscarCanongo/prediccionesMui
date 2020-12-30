@@ -3,8 +3,9 @@
     Display: flex;
     Height: 100vh;
     Width: 100%;
-    Align-Items: center;
-    Justify-Content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: url("../../images/matrix.gif") no-repeat fixed center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -22,7 +23,6 @@
 
 .cmd {
     position: relative;
-    top: 20px;
     background: rgba(0, 0, 0, 0.8);
     border-radius: 4px;
     border: 1px solid rgba(255, 255, 255, 0.4);
